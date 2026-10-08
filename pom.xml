@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <artifactId>lutece-global-pom</artifactId>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <version>8.0.2</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.paris.lutece.plugins</groupId>
+    <artifactId>plugin-ontour</artifactId>
+    <packaging>lutece-plugin</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Lutece onTour plugin</name>
+    <description>Guided tours and onboarding for Lutece back office and front office pages, powered by Driver.js</description>
+
+    <repositories>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>https://dev.lutece.paris.fr/maven_repository</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>luteceSnapshot</id>
+            <name>luteceSnapshot</name>
+            <url>https://dev.lutece.paris.fr/snapshot_repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>fr.paris.lutece</groupId>
+            <artifactId>lutece-core</artifactId>
+            <version>[8.0.2-beta-03,)</version>
+            <type>lutece-core</type>
+        </dependency>
+        <dependency>
+            <groupId>fr.paris.lutece.plugins</groupId>
+            <artifactId>library-lutece-unit-testing</artifactId>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <componentName>ontour</componentName>
+    </properties>
+</project>

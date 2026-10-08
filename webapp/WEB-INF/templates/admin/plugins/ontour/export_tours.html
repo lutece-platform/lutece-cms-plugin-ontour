@@ -1,0 +1,30 @@
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title='#i18n{ontour.export_tours.pageTitle}'>
+            <@button id='ontour-download' buttonIcon='download' title='#i18n{ontour.export_tours.buttonDownload}' color='primary' />
+            <@button id='ontour-copy' buttonIcon='copy' title='#i18n{ontour.export_tours.buttonCopy}' color='secondary' />
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='secondary' />
+        </@pageHeader>
+        <@alert color='info' title='#i18n{ontour.export_tours.help}' />
+        <@box>
+            <@boxBody id='ontour-json'>
+                <@code codeClass=''>${json?html}</@code>
+            </@boxBody>
+        </@box>
+    </@pageColumn>
+</@pageContainer>
+<script>
+( ( ) => {
+    const json = document.querySelector( '#ontour-json code' ).textContent.trim( );
+    document.getElementById( 'ontour-download' ).addEventListener( 'click', ( ) => {
+        const link = document.createElement( 'a' );
+        link.href = URL.createObjectURL( new Blob( [ json ], { type: 'application/json' } ) );
+        link.download = '${file_name?js_string}';
+        document.body.appendChild( link );
+        link.click( );
+        URL.revokeObjectURL( link.href );
+        link.remove( );
+    } );
+    document.getElementById( 'ontour-copy' ).addEventListener( 'click', ( ) => navigator.clipboard.writeText( json ) );
+} )( );
+</script>

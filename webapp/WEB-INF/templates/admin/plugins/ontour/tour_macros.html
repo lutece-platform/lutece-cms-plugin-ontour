@@ -1,0 +1,239 @@
+<#-- Shared form fragments of the onTour admin feature -->
+
+<#--
+Macro: buttonsCheckboxes
+Description: inline switches of the Driver.js buttons (next, previous, close)
+Parameters:
+- name (string): name of the checkboxes
+- idPrefix (string): prefix of the checkbox ids
+- selected (string): comma separated checked buttons
+-->
+<#macro buttonsCheckboxes name idPrefix selected>
+<#local selectedList = (selected!'')?split(',') />
+<#list buttons as button>
+    <@checkBox orientation='switch' wrapperClass='form-check-inline' name=name id='${idPrefix}_${button}' value=button labelKey='#i18n{ontour.button.${button}}' checked=selectedList?seq_contains(button) />
+</#list>
+</#macro>
+
+<#--
+Macro: tourForm
+Description: fields of the tour creation / modification form, grouped in tabs
+Parameters:
+- action (string): the action of the form
+-->
+<#macro tourForm action>
+<@tform method='post' name='tour_form' id='tour_form' action='jsp/admin/plugins/ontour/ManageTours.jsp' boxed=true>
+    <@input type='hidden' name='action' value=action />
+    <#if tour.id gt 0><@input type='hidden' name='id' value='${tour.id?c}' /></#if>
+    <@tabs id='tour-tabs' keepState=false>
+        <@tabList>
+            <@tabLink href='#tour-general' tabLabel='#i18n{ontour.tour_form.tab.general}' tabIcon='info-circle' active=true />
+            <@tabLink href='#tour-trigger' tabLabel='#i18n{ontour.tour_form.tab.trigger}' tabIcon='route' />
+            <@tabLink href='#tour-behavior' tabLabel='#i18n{ontour.tour_form.tab.behavior}' tabIcon='adjustments' />
+            <@tabLink href='#tour-popover' tabLabel='#i18n{ontour.tour_form.tab.popover}' tabIcon='message-2' />
+        </@tabList>
+        <@tabContent>
+            <@tabPanel id='tour-general' active=true>
+                <@formGroup labelFor='code' labelKey='#i18n{ontour.model.entity.tour.attribute.code}' helpKey='#i18n{ontour.model.entity.tour.attribute.code.help}' mandatory=true rows=2>
+                    <@input type='text' name='code' id='code' value=(tour.code!)?html maxlength=100 mandatory=true />
+                </@formGroup>
+                <@formGroup labelFor='lang' labelKey='#i18n{ontour.model.entity.tour.attribute.lang}' helpKey='#i18n{ontour.model.entity.tour.attribute.lang.help}' rows=2>
+                    <@select name='lang' id='lang' items=lang_list default_value=(tour.lang!)?html />
+                </@formGroup>
+                <@formGroup labelFor='title' labelKey='#i18n{ontour.model.entity.tour.attribute.title}' helpKey='#i18n{ontour.model.entity.tour.attribute.title.help}' mandatory=true rows=2>
+                    <@input type='text' name='title' id='title' value=(tour.title!)?html maxlength=255 mandatory=true />
+                </@formGroup>
+                <@formGroup labelFor='description' labelKey='#i18n{ontour.model.entity.tour.attribute.description}' helpKey='#i18n{ontour.model.entity.tour.attribute.description.help}' rows=2>
+                    <@input type='textarea' name='description' id='description' rows=3>${(tour.description!)?html}</@input>
+                </@formGroup>
+                <@formGroup labelFor='enabled' labelKey='#i18n{ontour.model.entity.tour.attribute.enabled}' rows=2>
+                    <@checkBox orientation='switch' name='enabled' id='enabled' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.enabled.help}' checked=tour.enabled />
+                </@formGroup>
+            </@tabPanel>
+            <@tabPanel id='tour-trigger'>
+                <@formGroup labelFor='target' labelKey='#i18n{ontour.model.entity.tour.attribute.target}' rows=2>
+                    <@select name='target' id='target' items=target_list default_value=(tour.target!)?html />
+                </@formGroup>
+                <@formGroup labelFor='page_path' labelKey='#i18n{ontour.model.entity.tour.attribute.pagePath}' helpKey='#i18n{ontour.model.entity.tour.attribute.pagePath.help}' rows=2>
+                    <@input type='text' name='page_path' id='page_path' value=(tour.pagePath!)?html maxlength=512 placeHolder='jsp/admin/plugins/blog/ManageBlogs.jsp' />
+                </@formGroup>
+                <@formGroup labelFor='page_parameters' labelKey='#i18n{ontour.model.entity.tour.attribute.pageParameters}' helpKey='#i18n{ontour.model.entity.tour.attribute.pageParameters.help}' rows=2>
+                    <@input type='text' name='page_parameters' id='page_parameters' value=(tour.pageParameters!)?html maxlength=512 placeHolder='view=manageBlogs' />
+                </@formGroup>
+                <@formGroup labelFor='page_selector' labelKey='#i18n{ontour.model.entity.tour.attribute.pageSelector}' helpKey='#i18n{ontour.model.entity.tour.attribute.pageSelector.help}' rows=2>
+                    <@input type='text' name='page_selector' id='page_selector' value=(tour.pageSelector!)?html maxlength=255 placeHolder='form[name="modify_blog"]' />
+                </@formGroup>
+                <@formGroup labelFor='trigger_mode' labelKey='#i18n{ontour.model.entity.tour.attribute.triggerMode}' helpKey='#i18n{ontour.model.entity.tour.attribute.triggerMode.help}' rows=2>
+                    <@select name='trigger_mode' id='trigger_mode' items=trigger_list default_value=(tour.triggerMode!)?html />
+                </@formGroup>
+                <@formGroup labelFor='show_launcher' labelKey='#i18n{ontour.model.entity.tour.attribute.showLauncher}' rows=2>
+                    <@checkBox orientation='switch' name='show_launcher' id='show_launcher' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.showLauncher.help}' checked=tour.showLauncher />
+                </@formGroup>
+            </@tabPanel>
+            <@tabPanel id='tour-behavior'>
+                <@formGroup labelKey='#i18n{ontour.tour_form.label.options}' rows=2>
+                    <@checkBox orientation='switch' name='animate' id='animate' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.animate}' checked=tour.animate />
+                    <@checkBox orientation='switch' name='smooth_scroll' id='smooth_scroll' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.smoothScroll}' checked=tour.smoothScroll />
+                    <@checkBox orientation='switch' name='allow_close' id='allow_close' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.allowClose}' checked=tour.allowClose />
+                    <@checkBox orientation='switch' name='allow_scroll' id='allow_scroll' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.allowScroll}' checked=tour.allowScroll />
+                    <@checkBox orientation='switch' name='allow_keyboard_control' id='allow_keyboard_control' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.allowKeyboardControl}' checked=tour.allowKeyboardControl />
+                    <@checkBox orientation='switch' name='disable_active_interaction' id='disable_active_interaction' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.disableActiveInteraction}' checked=tour.disableActiveInteraction />
+                    <@checkBox orientation='switch' name='advance_on_click' id='advance_on_click' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.advanceOnClick}' checked=tour.advanceOnClick />
+                    <@checkBox orientation='switch' name='skip_missing_element' id='skip_missing_element' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.skipMissingElement}' checked=tour.skipMissingElement />
+                </@formGroup>
+                <@formGroup labelFor='duration' labelKey='#i18n{ontour.model.entity.tour.attribute.duration}' helpKey='#i18n{ontour.model.entity.tour.attribute.duration.help}' rows=2>
+                    <@input type='number' name='duration' id='duration' value='${tour.duration?c}' min=0 />
+                </@formGroup>
+                <@formGroup labelFor='wait_for_element' labelKey='#i18n{ontour.model.entity.tour.attribute.waitForElement}' helpKey='#i18n{ontour.model.entity.tour.attribute.waitForElement.help}' rows=2>
+                    <@input type='number' name='wait_for_element' id='wait_for_element' value='${tour.waitForElement?c}' min=0 />
+                </@formGroup>
+                <@formGroup labelFor='overlay_click_behavior' labelKey='#i18n{ontour.model.entity.tour.attribute.overlayClickBehavior}' rows=2>
+                    <@select name='overlay_click_behavior' id='overlay_click_behavior' items=overlay_click_list default_value=(tour.overlayClickBehavior!)?html />
+                </@formGroup>
+                <@formGroup labelFor='overlay_color' labelKey='#i18n{ontour.model.entity.tour.attribute.overlayColor}' helpKey='#i18n{ontour.model.entity.tour.attribute.overlayColor.help}' rows=2>
+                    <@input type='text' name='overlay_color' id='overlay_color' value=(tour.overlayColor!)?html maxlength=50 />
+                </@formGroup>
+                <@formGroup labelFor='overlay_opacity' labelKey='#i18n{ontour.model.entity.tour.attribute.overlayOpacity}' helpKey='#i18n{ontour.model.entity.tour.attribute.overlayOpacity.help}' rows=2>
+                    <@input type='number' name='overlay_opacity' id='overlay_opacity' value='${tour.overlayOpacity?c}' min=0 max=100 />
+                </@formGroup>
+                <@formGroup labelFor='stage_padding' labelKey='#i18n{ontour.model.entity.tour.attribute.stagePadding}' rows=2>
+                    <@input type='number' name='stage_padding' id='stage_padding' value='${tour.stagePadding?c}' min=0 />
+                </@formGroup>
+                <@formGroup labelFor='stage_radius' labelKey='#i18n{ontour.model.entity.tour.attribute.stageRadius}' rows=2>
+                    <@input type='number' name='stage_radius' id='stage_radius' value='${tour.stageRadius?c}' min=0 />
+                </@formGroup>
+            </@tabPanel>
+            <@tabPanel id='tour-popover'>
+                <@formGroup labelKey='#i18n{ontour.model.entity.tour.attribute.showButtons}' rows=2>
+                    <@buttonsCheckboxes name='show_buttons_list' idPrefix='show_buttons' selected=tour.showButtons! />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{ontour.model.entity.tour.attribute.disableButtons}' rows=2>
+                    <@buttonsCheckboxes name='disable_buttons_list' idPrefix='disable_buttons' selected=tour.disableButtons! />
+                </@formGroup>
+                <@formGroup labelFor='show_progress' labelKey='#i18n{ontour.model.entity.tour.attribute.showProgress}' rows=2>
+                    <@checkBox orientation='switch' name='show_progress' id='show_progress' value='true' labelKey='#i18n{ontour.model.entity.tour.attribute.showProgress.help}' checked=tour.showProgress />
+                </@formGroup>
+                <@formGroup labelFor='progress_text' labelKey='#i18n{ontour.model.entity.tour.attribute.progressText}' helpKey='#i18n{ontour.model.entity.tour.attribute.progressText.help}' rows=2>
+                    <@input type='text' name='progress_text' id='progress_text' value=(tour.progressText!)?html maxlength=255 placeHolder='{{current}} / {{total}}' />
+                </@formGroup>
+                <@formGroup labelFor='next_btn_text' labelKey='#i18n{ontour.model.entity.tour.attribute.nextBtnText}' helpKey='#i18n{ontour.tour_form.help.defaultText}' rows=2>
+                    <@input type='text' name='next_btn_text' id='next_btn_text' value=(tour.nextBtnText!)?html maxlength=100 />
+                </@formGroup>
+                <@formGroup labelFor='prev_btn_text' labelKey='#i18n{ontour.model.entity.tour.attribute.prevBtnText}' helpKey='#i18n{ontour.tour_form.help.defaultText}' rows=2>
+                    <@input type='text' name='prev_btn_text' id='prev_btn_text' value=(tour.prevBtnText!)?html maxlength=100 />
+                </@formGroup>
+                <@formGroup labelFor='done_btn_text' labelKey='#i18n{ontour.model.entity.tour.attribute.doneBtnText}' helpKey='#i18n{ontour.tour_form.help.defaultText}' rows=2>
+                    <@input type='text' name='done_btn_text' id='done_btn_text' value=(tour.doneBtnText!)?html maxlength=100 />
+                </@formGroup>
+                <@formGroup labelFor='popover_class' labelKey='#i18n{ontour.model.entity.tour.attribute.popoverClass}' helpKey='#i18n{ontour.model.entity.tour.attribute.popoverClass.help}' rows=2>
+                    <@input type='text' name='popover_class' id='popover_class' value=(tour.popoverClass!)?html maxlength=255 />
+                </@formGroup>
+                <@formGroup labelFor='popover_offset' labelKey='#i18n{ontour.model.entity.tour.attribute.popoverOffset}' rows=2>
+                    <@input type='number' name='popover_offset' id='popover_offset' value='${tour.popoverOffset?c}' min=0 />
+                </@formGroup>
+            </@tabPanel>
+        </@tabContent>
+    </@tabs>
+    <@formGroup rows=2>
+        <@button type='submit' buttonIcon='check' title='#i18n{portal.util.labelValidate}' color='primary' />
+        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='x' title='#i18n{portal.util.labelCancel}' color='secondary' />
+    </@formGroup>
+</@tform>
+</#macro>
+
+<#--
+Macro: triStateSelect
+Description: select of a step option that can inherit the tour value
+Parameters:
+- name (string): the field name
+- value (int): the current value (-1 inherit, 0 no, 1 yes)
+-->
+<#macro triStateSelect name value>
+<@select name=name id=name items=tri_state_list default_value='${value?c}' />
+</#macro>
+
+<#--
+Macro: stepForm
+Description: fields of the step creation / modification form
+Parameters:
+- action (string): the action of the form
+-->
+<#macro stepForm action>
+<@tform method='post' name='step_form' id='step_form' action='jsp/admin/plugins/ontour/ManageTours.jsp' boxed=true>
+    <@input type='hidden' name='action' value=action />
+    <@input type='hidden' name='id_tour' value='${step.idTour?c}' />
+    <#if step.id gt 0><@input type='hidden' name='id' value='${step.id?c}' /></#if>
+    <@tabs id='step-tabs' keepState=false>
+        <@tabList>
+            <@tabLink href='#step-content' tabLabel='#i18n{ontour.step_form.tab.content}' tabIcon='message-2' active=true />
+            <@tabLink href='#step-popover' tabLabel='#i18n{ontour.step_form.tab.popover}' tabIcon='layout' />
+            <@tabLink href='#step-behavior' tabLabel='#i18n{ontour.step_form.tab.behavior}' tabIcon='adjustments' />
+        </@tabList>
+        <@tabContent>
+            <@tabPanel id='step-content' active=true>
+                <@formGroup labelFor='element' labelKey='#i18n{ontour.model.entity.step.attribute.element}' helpKey='#i18n{ontour.model.entity.step.attribute.element.help}' rows=2>
+                    <@input type='text' name='element' id='element' value=(step.element!)?html maxlength=512 placeHolder='#blog-list, [data-ontour="blog-create"]' />
+                </@formGroup>
+                <@formGroup labelFor='title' labelKey='#i18n{ontour.model.entity.step.attribute.title}' rows=2>
+                    <@input type='text' name='title' id='title' value=(step.title!)?html maxlength=255 />
+                </@formGroup>
+                <@formGroup labelFor='description' labelKey='#i18n{ontour.model.entity.step.attribute.description}' helpKey='#i18n{ontour.model.entity.step.attribute.description.help}' rows=2>
+                    <@input type='textarea' name='description' id='description' rows=6>${(step.description!)?html}</@input>
+                </@formGroup>
+            </@tabPanel>
+            <@tabPanel id='step-popover'>
+                <@formGroup labelFor='side' labelKey='#i18n{ontour.model.entity.step.attribute.side}' rows=2>
+                    <@select name='side' id='side' items=side_list default_value=(step.side!)?html />
+                </@formGroup>
+                <@formGroup labelFor='align' labelKey='#i18n{ontour.model.entity.step.attribute.align}' rows=2>
+                    <@select name='align' id='align' items=align_list default_value=(step.align!)?html />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{ontour.model.entity.step.attribute.showButtons}' rows=2>
+                    <@checkBox orientation='switch' name='override_show_buttons' id='override_show_buttons' value='true' labelKey='#i18n{ontour.model.entity.step.attribute.overrideButtons}' checked=step.showButtons?? />
+                    <@buttonsCheckboxes name='show_buttons_list' idPrefix='show_buttons' selected=step.showButtons!(tour.showButtons!'') />
+                </@formGroup>
+                <@formGroup labelKey='#i18n{ontour.model.entity.step.attribute.disableButtons}' rows=2>
+                    <@checkBox orientation='switch' name='override_disable_buttons' id='override_disable_buttons' value='true' labelKey='#i18n{ontour.model.entity.step.attribute.overrideButtons}' checked=step.disableButtons?? />
+                    <@buttonsCheckboxes name='disable_buttons_list' idPrefix='disable_buttons' selected=step.disableButtons!(tour.disableButtons!'') />
+                </@formGroup>
+                <@formGroup labelFor='show_progress' labelKey='#i18n{ontour.model.entity.step.attribute.showProgress}' rows=2>
+                    <@triStateSelect name='show_progress' value=step.showProgress />
+                </@formGroup>
+                <@formGroup labelFor='progress_text' labelKey='#i18n{ontour.model.entity.step.attribute.progressText}' helpKey='#i18n{ontour.step_form.help.inheritText}' rows=2>
+                    <@input type='text' name='progress_text' id='progress_text' value=(step.progressText!)?html maxlength=255 />
+                </@formGroup>
+                <@formGroup labelFor='next_btn_text' labelKey='#i18n{ontour.model.entity.step.attribute.nextBtnText}' helpKey='#i18n{ontour.step_form.help.inheritText}' rows=2>
+                    <@input type='text' name='next_btn_text' id='next_btn_text' value=(step.nextBtnText!)?html maxlength=100 />
+                </@formGroup>
+                <@formGroup labelFor='prev_btn_text' labelKey='#i18n{ontour.model.entity.step.attribute.prevBtnText}' helpKey='#i18n{ontour.step_form.help.inheritText}' rows=2>
+                    <@input type='text' name='prev_btn_text' id='prev_btn_text' value=(step.prevBtnText!)?html maxlength=100 />
+                </@formGroup>
+                <@formGroup labelFor='done_btn_text' labelKey='#i18n{ontour.model.entity.step.attribute.doneBtnText}' helpKey='#i18n{ontour.step_form.help.inheritText}' rows=2>
+                    <@input type='text' name='done_btn_text' id='done_btn_text' value=(step.doneBtnText!)?html maxlength=100 />
+                </@formGroup>
+                <@formGroup labelFor='popover_class' labelKey='#i18n{ontour.model.entity.step.attribute.popoverClass}' rows=2>
+                    <@input type='text' name='popover_class' id='popover_class' value=(step.popoverClass!)?html maxlength=255 />
+                </@formGroup>
+            </@tabPanel>
+            <@tabPanel id='step-behavior'>
+                <@formGroup labelFor='disable_active_interaction' labelKey='#i18n{ontour.model.entity.step.attribute.disableActiveInteraction}' rows=2>
+                    <@triStateSelect name='disable_active_interaction' value=step.disableActiveInteraction />
+                </@formGroup>
+                <@formGroup labelFor='advance_on_click' labelKey='#i18n{ontour.model.entity.step.attribute.advanceOnClick}' rows=2>
+                    <@triStateSelect name='advance_on_click' value=step.advanceOnClick />
+                </@formGroup>
+                <@formGroup labelFor='skip_missing_element' labelKey='#i18n{ontour.model.entity.step.attribute.skipMissingElement}' rows=2>
+                    <@triStateSelect name='skip_missing_element' value=step.skipMissingElement />
+                </@formGroup>
+                <@formGroup labelFor='wait_for_element' labelKey='#i18n{ontour.model.entity.step.attribute.waitForElement}' helpKey='#i18n{ontour.model.entity.step.attribute.waitForElement.help}' rows=2>
+                    <@input type='number' name='wait_for_element' id='wait_for_element' value='${step.waitForElement?c}' min=-1 />
+                </@formGroup>
+            </@tabPanel>
+        </@tabContent>
+    </@tabs>
+    <@formGroup rows=2>
+        <@button type='submit' buttonIcon='check' title='#i18n{portal.util.labelValidate}' color='primary' />
+        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageSteps&id=${step.idTour?c}' buttonIcon='x' title='#i18n{portal.util.labelCancel}' color='secondary' />
+    </@formGroup>
+</@tform>
+</#macro>

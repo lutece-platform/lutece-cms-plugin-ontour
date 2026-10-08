@@ -1,0 +1,559 @@
+{
+  "version": 1,
+  "tours": [
+    {
+      "code": "blog-manage-blogs",
+      "lang": "fr",
+      "title": "Blog : gérer les billets",
+      "description": "Liste des billets de plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageBlogs.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"form-manage\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Gestion des billets",
+          "description": "Cet écran liste les billets du blog. Cette visite présente la recherche, la création et les actions disponibles sur chaque billet."
+        },
+        {
+          "element": "#search_text_a",
+          "title": "Recherche rapide",
+          "description": "Recherchez dans le titre et le contenu des billets. Le caractère <code>*</code> sert de joker : <code>paris vil*</code>.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#btn-offcanvasSearch",
+          "title": "Recherche avancée",
+          "description": "Filtrez par tags, par date de mise à jour et par statut de publication, ou n'affichez que vos billets.",
+          "side": "bottom"
+        },
+        {
+          "element": "button[name=\"view_createBlog\"]",
+          "title": "Ajouter un billet",
+          "description": "Ouvre l'éditeur d'un nouveau billet.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".item-labels",
+          "title": "Un billet",
+          "description": "Cliquez sur le titre pour modifier le billet. Ses tags et le dernier rédacteur sont rappelés.",
+          "side": "top"
+        },
+        {
+          "element": "[id^=\"btn-blog-publication-\"]",
+          "title": "Publication",
+          "description": "Publiez le billet dans une ou plusieurs rubriques du site. Le badge indique le nombre de publications.",
+          "side": "left"
+        },
+        {
+          "element": "[id^=\"btn-blog-history-\"]",
+          "title": "Historique",
+          "description": "Chaque enregistrement crée une version : consultez-les, comparez-les ou restaurez-en une.",
+          "side": "left"
+        },
+        {
+          "element": "a[href*=\"action=duplicateBlog\"]",
+          "title": "Dupliquer",
+          "description": "Crée une copie du billet, pratique pour partir d'un modèle.",
+          "side": "left"
+        },
+        {
+          "element": ".btn-preview",
+          "title": "Voir sur le site",
+          "description": "Affiche le billet tel qu'il apparaît en front office, dans un nouvel onglet.",
+          "side": "left"
+        },
+        {
+          "element": "#select_all_blogs_id",
+          "title": "Actions groupées",
+          "description": "Au-delà de cinq billets, sélectionnez-en plusieurs pour les archiver ou les supprimer en une fois.",
+          "side": "bottom",
+          "align": "start"
+        }
+      ]
+    },
+    {
+      "code": "blog-manage-blogs",
+      "lang": "en",
+      "title": "Blog: managing the posts",
+      "description": "Post list of plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageBlogs.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"form-manage\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Managing the posts",
+          "description": "This screen lists the blog posts. This tour presents the search, the creation and the actions available on each post."
+        },
+        {
+          "element": "#search_text_a",
+          "title": "Quick search",
+          "description": "Search the title and the content of the posts. <code>*</code> is a wildcard: <code>paris vil*</code>.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#btn-offcanvasSearch",
+          "title": "Advanced search",
+          "description": "Filter by tags, update date and publication status, or show only your own posts.",
+          "side": "bottom"
+        },
+        {
+          "element": "button[name=\"view_createBlog\"]",
+          "title": "Add a post",
+          "description": "Opens the editor of a new post.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".item-labels",
+          "title": "A post",
+          "description": "Click the title to edit the post. Its tags and its last editor are shown.",
+          "side": "top"
+        },
+        {
+          "element": "[id^=\"btn-blog-publication-\"]",
+          "title": "Publication",
+          "description": "Publish the post in one or more pages of the site. The badge shows the number of publications.",
+          "side": "left"
+        },
+        {
+          "element": "[id^=\"btn-blog-history-\"]",
+          "title": "History",
+          "description": "Every save creates a version: browse them, compare them or restore one.",
+          "side": "left"
+        },
+        {
+          "element": "a[href*=\"action=duplicateBlog\"]",
+          "title": "Duplicate",
+          "description": "Creates a copy of the post, handy to start from a model.",
+          "side": "left"
+        },
+        {
+          "element": ".btn-preview",
+          "title": "View on the site",
+          "description": "Shows the post as it appears on the front office, in a new tab.",
+          "side": "left"
+        },
+        {
+          "element": "#select_all_blogs_id",
+          "title": "Bulk actions",
+          "description": "Beyond five posts, select several of them to archive or delete them at once.",
+          "side": "bottom",
+          "align": "start"
+        }
+      ]
+    },
+    {
+      "code": "blog-create-blog",
+      "lang": "fr",
+      "title": "Blog : rédiger un billet",
+      "description": "Formulaire de création de plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageBlogs.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"create_blog\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "element": "#content_label",
+          "title": "Titre",
+          "description": "Le titre du billet, 75 caractères au plus.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#description",
+          "title": "Description",
+          "description": "Le résumé affiché dans les listes de billets et en tête du billet, 300 caractères au plus.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#div_html_content",
+          "title": "Contenu",
+          "description": "Rédigez le billet directement dans cette zone : l'éditeur propose la mise en forme, les liens et les images.",
+          "side": "top"
+        },
+        {
+          "element": "#btn-blog-properties",
+          "title": "Propriétés",
+          "description": "Les tags, les pièces jointes, l'URL externe et le commentaire de modification se règlent dans ce panneau.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#action_createBlog",
+          "title": "Créer",
+          "description": "Enregistre le billet. Il pourra ensuite être publié dans une rubrique.",
+          "side": "bottom",
+          "align": "end"
+        }
+      ]
+    },
+    {
+      "code": "blog-create-blog",
+      "lang": "en",
+      "title": "Blog: writing a post",
+      "description": "Creation form of plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageBlogs.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"create_blog\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "element": "#content_label",
+          "title": "Title",
+          "description": "The title of the post, 75 characters at most.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#description",
+          "title": "Description",
+          "description": "The summary shown in the post lists and at the top of the post, 300 characters at most.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#div_html_content",
+          "title": "Content",
+          "description": "Write the post right here: the editor offers formatting, links and images.",
+          "side": "top"
+        },
+        {
+          "element": "#btn-blog-properties",
+          "title": "Properties",
+          "description": "Tags, attachments, external URL and edit comment are set in this panel.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#action_createBlog",
+          "title": "Create",
+          "description": "Saves the post. It can then be published in a page of the site.",
+          "side": "bottom",
+          "align": "end"
+        }
+      ]
+    },
+    {
+      "code": "blog-modify-blog",
+      "lang": "fr",
+      "title": "Blog : modifier un billet",
+      "description": "Formulaire de modification de plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageBlogs.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"modify_blog\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Modifier un billet",
+          "description": "Pendant votre modification, le billet est verrouillé pour les autres rédacteurs."
+        },
+        {
+          "element": "#div_html_content",
+          "title": "Contenu",
+          "description": "Modifiez le contenu du billet dans cette zone.",
+          "side": "top"
+        },
+        {
+          "element": "#btn-blog-properties",
+          "title": "Propriétés",
+          "description": "Tags et leur ordre, pièces jointes, sommaire automatique, articles liés, URL et commentaire de modification.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-blog-publication",
+          "title": "Publication",
+          "description": "Choisissez les rubriques où publier le billet, et ses dates de publication.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-blog-history",
+          "title": "Historique",
+          "description": "Consultez les versions précédentes du billet, comparez-les ou restaurez-en une.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-blog-preview",
+          "title": "Prévisualiser",
+          "description": "Vérifiez le rendu du billet avant de le diffuser.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#action_modifyblog",
+          "title": "Actualiser",
+          "description": "Enregistre une nouvelle version dans l'historique et reste dans l'éditeur.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#apply_modifyblog",
+          "title": "Enregistrer",
+          "description": "Met à jour le billet diffusé sur le site et revient à la liste. Nécessite le droit de publication.",
+          "side": "bottom",
+          "align": "end"
+        }
+      ]
+    },
+    {
+      "code": "blog-modify-blog",
+      "lang": "en",
+      "title": "Blog: editing a post",
+      "description": "Edit form of plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageBlogs.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"modify_blog\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Editing a post",
+          "description": "While you edit it, the post is locked for the other editors."
+        },
+        {
+          "element": "#div_html_content",
+          "title": "Content",
+          "description": "Edit the content of the post here.",
+          "side": "top"
+        },
+        {
+          "element": "#btn-blog-properties",
+          "title": "Properties",
+          "description": "Tags and their order, attachments, automatic table of contents, related posts, URL and edit comment.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-blog-publication",
+          "title": "Publication",
+          "description": "Choose the pages where the post is published, and its publication dates.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-blog-history",
+          "title": "History",
+          "description": "Browse the previous versions of the post, compare them or restore one.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-blog-preview",
+          "title": "Preview",
+          "description": "Check how the post looks before releasing it.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#action_modifyblog",
+          "title": "Update",
+          "description": "Saves a new version in the history and stays in the editor.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#apply_modifyblog",
+          "title": "Save",
+          "description": "Updates the post released on the site and goes back to the list. Requires the publication right.",
+          "side": "bottom",
+          "align": "end"
+        }
+      ]
+    },
+    {
+      "code": "blog-manage-tags",
+      "lang": "fr",
+      "title": "Blog : gérer les tags",
+      "description": "Gestion des tags de plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageTags.jsp",
+      "pageParameters": "",
+      "pageSelector": "#search_tag",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Les tags",
+          "description": "Les tags classent les billets. Ils servent à rechercher les billets et à choisir ceux qu'affichent les rubriques."
+        },
+        {
+          "element": "#search_tag",
+          "title": "Filtrer",
+          "description": "Filtre instantanément la liste des tags.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#btn-offcanvasCreateTag",
+          "title": "Créer un tag",
+          "description": "Saisissez son nom dans le panneau qui s'ouvre.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".item-labels",
+          "title": "Un tag",
+          "description": "Modifiez son nom ou supprimez-le, selon vos droits.",
+          "side": "top"
+        }
+      ]
+    },
+    {
+      "code": "blog-manage-tags",
+      "lang": "en",
+      "title": "Blog: managing the tags",
+      "description": "Tag management of plugin-blog",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/blog/ManageTags.jsp",
+      "pageParameters": "",
+      "pageSelector": "#search_tag",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Tags",
+          "description": "Tags classify the posts. They are used to search the posts and to choose the ones displayed by the pages."
+        },
+        {
+          "element": "#search_tag",
+          "title": "Filter",
+          "description": "Filters the tag list instantly.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#btn-offcanvasCreateTag",
+          "title": "Create a tag",
+          "description": "Type its name in the panel that opens.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".item-labels",
+          "title": "A tag",
+          "description": "Rename or delete it, depending on your rights.",
+          "side": "top"
+        }
+      ]
+    },
+    {
+      "code": "blog-read-post",
+      "lang": "fr",
+      "title": "Lire un billet",
+      "description": "Page de lecture d'un billet (XPage blog)",
+      "target": "FO",
+      "pagePath": "jsp/site/Portal.jsp",
+      "pageParameters": "page=blog",
+      "pageSelector": ".blog-title",
+      "triggerMode": "manual",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": false,
+      "steps": [
+        {
+          "element": ".blog-title",
+          "title": "Le billet",
+          "description": "Titre et chapeau du billet.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".blog-hero__meta",
+          "title": "Catégories et date",
+          "description": "Les catégories du billet, sa date de mise à jour et le temps de lecture estimé.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".blog-author",
+          "title": "L'auteur",
+          "description": "La personne qui a rédigé ce billet.",
+          "side": "top",
+          "align": "start"
+        }
+      ]
+    },
+    {
+      "code": "blog-read-post",
+      "lang": "en",
+      "title": "Reading a post",
+      "description": "Post page (blog XPage)",
+      "target": "FO",
+      "pagePath": "jsp/site/Portal.jsp",
+      "pageParameters": "page=blog",
+      "pageSelector": ".blog-title",
+      "triggerMode": "manual",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": false,
+      "steps": [
+        {
+          "element": ".blog-title",
+          "title": "The post",
+          "description": "Title and summary of the post.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".blog-hero__meta",
+          "title": "Categories and date",
+          "description": "The categories of the post, its update date and the estimated reading time.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".blog-author",
+          "title": "The author",
+          "description": "The person who wrote this post.",
+          "side": "top",
+          "align": "start"
+        }
+      ]
+    }
+  ]
+}

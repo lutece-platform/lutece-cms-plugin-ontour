@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "tours": [
+    {
+      "code": "site-demo-home",
+      "lang": "fr",
+      "title": "Découvrir le site",
+      "description": "Page d'accueil du site de démonstration Lutece (front office)",
+      "target": "FO",
+      "pagePath": "*",
+      "pageParameters": "",
+      "pageSelector": ".hero__cta",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "waitForElement": 1000,
+      "showProgress": true,
+      "smoothScroll": true,
+      "steps": [
+        {
+          "title": "Bienvenue sur Lutece",
+          "description": "Cette courte visite présente la page d'accueil du site de démonstration et les accès à la plateforme."
+        },
+        {
+          "element": ".navbar-brand",
+          "title": "Accueil",
+          "description": "Le logo ramène à la page d'accueil depuis n'importe quelle page du site.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#navbarMainMenu .navbar-nav",
+          "title": "Le menu",
+          "description": "Les rubriques du site. Sur mobile, il s'ouvre avec le bouton du bandeau.",
+          "side": "bottom"
+        },
+        {
+          "element": ".lang-btn",
+          "title": "Langue",
+          "description": "Affichez le site dans une autre langue.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "main h1",
+          "title": "Lutece en une phrase",
+          "description": "Des services numériques prêts à déployer : démarches, rendez-vous, identité, contact.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".hero__cta a[href*=\"site-demo\"]",
+          "title": "La démo",
+          "description": "Parcourez un site complet construit avec Lutece.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".hero__cta a[href*=\"lutece.paris.fr/lutece\"]",
+          "title": "La documentation",
+          "description": "Le wiki de la plateforme : installation, plugins, développement.",
+          "side": "bottom"
+        },
+        {
+          "element": ".hero__cta a[href*=\"github.com\"]",
+          "title": "Le code source",
+          "description": "Tout Lutece est open source, sur GitHub depuis 2002.",
+          "side": "bottom"
+        },
+        {
+          "element": ".hero__cta a[href*=\"AdminLogin.jsp\"]",
+          "title": "Le back-office",
+          "description": "L'administration du site. Les identifiants de démonstration s'affichent au survol du bouton.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "main .row.py-m",
+          "title": "Les points forts",
+          "description": "Modulaire, open source et éprouvé en production dans le secteur public.",
+          "side": "top",
+          "align": "start"
+        },
+        {
+          "element": ".foot__grid_social",
+          "title": "Restez informé",
+          "description": "Suivez Lutece sur les réseaux sociaux.",
+          "side": "top"
+        },
+        {
+          "element": ".ontour-launcher-button",
+          "title": "Revoir la visite",
+          "description": "Ce bouton relance la visite à tout moment.",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "code": "site-demo-home",
+      "lang": "en",
+      "title": "Discover the site",
+      "description": "Home page of the Lutece demo site (front office)",
+      "target": "FO",
+      "pagePath": "*",
+      "pageParameters": "",
+      "pageSelector": ".hero__cta",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "waitForElement": 1000,
+      "showProgress": true,
+      "smoothScroll": true,
+      "steps": [
+        {
+          "title": "Welcome to Lutece",
+          "description": "This short tour presents the home page of the demo site and the ways into the platform."
+        },
+        {
+          "element": ".navbar-brand",
+          "title": "Home",
+          "description": "The logo brings you back to the home page from anywhere on the site.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#navbarMainMenu .navbar-nav",
+          "title": "The menu",
+          "description": "The sections of the site. On mobile, open it with the button of the banner.",
+          "side": "bottom"
+        },
+        {
+          "element": ".lang-btn",
+          "title": "Language",
+          "description": "Display the site in another language.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "main h1",
+          "title": "Lutece in one sentence",
+          "description": "Digital services ready to deploy: online procedures, appointments, identity, contact.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".hero__cta a[href*=\"site-demo\"]",
+          "title": "The demo",
+          "description": "Browse a complete site built with Lutece.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".hero__cta a[href*=\"lutece.paris.fr/lutece\"]",
+          "title": "The documentation",
+          "description": "The platform wiki: installation, plugins, development.",
+          "side": "bottom"
+        },
+        {
+          "element": ".hero__cta a[href*=\"github.com\"]",
+          "title": "The source code",
+          "description": "All of Lutece is open source, on GitHub since 2002.",
+          "side": "bottom"
+        },
+        {
+          "element": ".hero__cta a[href*=\"AdminLogin.jsp\"]",
+          "title": "The back office",
+          "description": "The administration of the site. The demo credentials show when you hover the button.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "main .row.py-m",
+          "title": "Highlights",
+          "description": "Modular, open source and proven in production in the public sector.",
+          "side": "top",
+          "align": "start"
+        },
+        {
+          "element": ".foot__grid_social",
+          "title": "Stay tuned",
+          "description": "Follow Lutece on social networks.",
+          "side": "top"
+        },
+        {
+          "element": ".ontour-launcher-button",
+          "title": "Take the tour again",
+          "description": "This button starts the tour again at any time.",
+          "side": "left"
+        }
+      ]
+    }
+  ]
+}

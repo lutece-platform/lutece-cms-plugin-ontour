@@ -1,0 +1,11 @@
+<#include "/admin/plugins/ontour/tour_macros.html" />
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title='#i18n{ontour.modify_tour.pageTitle} : ${(tour.title!)?html}'>
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageSteps&id=${tour.id?c}' buttonIcon='list-numbers' title='#i18n{ontour.manage_tours.buttonSteps}' color='primary' />
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='secondary' />
+        </@pageHeader>
+        <@messages errors=errors![] />
+        <@tourForm action='modifyTour' />
+    </@pageColumn>
+</@pageContainer>

@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "tours": [
+    {
+      "code": "ontour-admin",
+      "lang": "fr",
+      "title": "Découvrir les visites guidées",
+      "description": "Visite livrée par le plugin onTour : présentation de l'écran de gestion des visites.",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/ontour/ManageTours.jsp",
+      "pageParameters": "",
+      "pageSelector": "[data-ontour=\"ontour-add\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "waitForElement": 1500,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Bienvenue dans onTour",
+          "description": "Une visite guidée met en évidence, étape par étape, les éléments d'une page du back office ou du front office."
+        },
+        {
+          "element": "[data-ontour=\"ontour-add\"]",
+          "title": "Créer une visite",
+          "description": "Indiquez la page ciblée (chemin et paramètres) et le mode de démarrage : manuel, à la première visite ou à chaque visite.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#ontour-tour-list",
+          "title": "Vos visites",
+          "description": "Chaque visite regroupe des <strong>étapes</strong> : un sélecteur CSS, un titre et un texte (HTML autorisé).",
+          "side": "top"
+        },
+        {
+          "element": "[data-ontour=\"ontour-steps\"]",
+          "title": "Gérer les étapes",
+          "description": "Ajoutez, ordonnez et paramétrez les étapes : position de la bulle, boutons, attente d'un élément, etc.",
+          "side": "left"
+        },
+        {
+          "element": "[data-ontour=\"ontour-test\"]",
+          "title": "Tester",
+          "description": "Ouvre la page ciblée et lance immédiatement la visite (paramètre <code>?ontour=code</code>).",
+          "side": "left"
+        },
+        {
+          "element": "[data-ontour=\"ontour-import\"]",
+          "title": "Importer et exporter",
+          "description": "Les visites s'échangent au format JSON. Un plugin peut aussi livrer ses visites dans <code>/WEB-INF/plugins/ontour/tours/</code> : elles sont importées au démarrage.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".ontour-launcher-button",
+          "title": "Relancer une visite",
+          "description": "Ce bouton liste les visites disponibles sur la page courante.",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "code": "ontour-admin",
+      "lang": "en",
+      "title": "Discover the guided tours",
+      "description": "Tour shipped by the onTour plugin: presentation of the tour management screen.",
+      "target": "BO",
+      "pagePath": "jsp/admin/plugins/ontour/ManageTours.jsp",
+      "pageParameters": "",
+      "pageSelector": "[data-ontour=\"ontour-add\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "waitForElement": 1500,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Welcome to onTour",
+          "description": "A guided tour highlights, step by step, the elements of a back office or front office page."
+        },
+        {
+          "element": "[data-ontour=\"ontour-add\"]",
+          "title": "Create a tour",
+          "description": "Set the target page (path and parameters) and the start mode: manual, on the first visit or on every visit.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#ontour-tour-list",
+          "title": "Your tours",
+          "description": "Each tour groups <strong>steps</strong>: a CSS selector, a title and a description (HTML allowed).",
+          "side": "top"
+        },
+        {
+          "element": "[data-ontour=\"ontour-steps\"]",
+          "title": "Manage the steps",
+          "description": "Add, order and configure the steps: popover position, buttons, waiting for an element, etc.",
+          "side": "left"
+        },
+        {
+          "element": "[data-ontour=\"ontour-test\"]",
+          "title": "Test",
+          "description": "Opens the target page and starts the tour right away (<code>?ontour=code</code> parameter).",
+          "side": "left"
+        },
+        {
+          "element": "[data-ontour=\"ontour-import\"]",
+          "title": "Import and export",
+          "description": "Tours are exchanged as JSON. A plugin can also ship its tours in <code>/WEB-INF/plugins/ontour/tours/</code>: they are imported at startup.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".ontour-launcher-button",
+          "title": "Start a tour again",
+          "description": "This button lists the tours available on the current page.",
+          "side": "left"
+        }
+      ]
+    }
+  ]
+}

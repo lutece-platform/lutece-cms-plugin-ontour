@@ -1,0 +1,169 @@
+/* onTour launcher and Driver.js popover adjustments. Override the custom properties in the site theme. */
+:root {
+    --ontour-color: #1f5fbf;
+    --ontour-color-contrast: #fff;
+    --ontour-offset: 1.25rem;
+    --ontour-z-index: 1040;
+}
+
+.ontour-launcher {
+    position: fixed;
+    right: var(--ontour-offset);
+    bottom: var(--ontour-offset);
+    z-index: var(--ontour-z-index);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: .5rem;
+}
+
+/* Position of the launcher (site property): the menu opens towards the middle of the screen */
+.ontour-launcher--bottom-left {
+    right: auto;
+    left: var(--ontour-offset);
+    align-items: flex-start;
+}
+
+.ontour-launcher--bottom-center {
+    right: auto;
+    left: 50%;
+    align-items: center;
+    transform: translateX( -50% );
+}
+
+.ontour-launcher--top-center {
+    top: var(--ontour-offset);
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX( -50% );
+}
+
+.ontour-launcher--top-right {
+    top: var(--ontour-offset);
+    bottom: auto;
+    flex-direction: column;
+}
+
+.ontour-launcher--top-left {
+    top: var(--ontour-offset);
+    right: auto;
+    bottom: auto;
+    left: var(--ontour-offset);
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ontour-launcher-button {
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    border-radius: 50%;
+    background: var(--ontour-color);
+    color: var(--ontour-color-contrast);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
+    cursor: pointer;
+}
+
+.ontour-launcher-button:hover,
+.ontour-launcher-button:focus-visible {
+    filter: brightness(1.1);
+    outline: 3px solid color-mix(in srgb, var(--ontour-color) 40%, transparent);
+    outline-offset: 2px;
+}
+
+.ontour-launcher-menu {
+    min-width: 14rem;
+    max-width: 20rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    background: #fff;
+    color: #1d273b;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .2);
+}
+
+.ontour-launcher-menu[hidden] {
+    display: none;
+}
+
+.ontour-launcher-title {
+    margin: 0 0 .25rem;
+    padding: .25rem .5rem;
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: .7;
+}
+
+.ontour-launcher-item {
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    border: 0;
+    border-radius: .25rem;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ontour-launcher-item:hover,
+.ontour-launcher-item:focus-visible {
+    background: color-mix(in srgb, var(--ontour-color) 12%, transparent);
+}
+
+.driver-popover {
+    max-width: 22rem;
+}
+
+/* Popover buttons follow the main color (site property style.color): "Next" / "Done" is the main action, "Previous" the secondary one */
+.driver-popover .driver-popover-next-btn {
+    border-color: var(--ontour-color);
+    background-color: var(--ontour-color);
+    color: var(--ontour-color-contrast);
+    text-shadow: none;
+}
+
+.driver-popover .driver-popover-next-btn:hover,
+.driver-popover .driver-popover-next-btn:focus {
+    background-color: color-mix(in srgb, var(--ontour-color) 85%, #000);
+    border-color: color-mix(in srgb, var(--ontour-color) 85%, #000);
+}
+
+.driver-popover .driver-popover-prev-btn {
+    border-color: var(--ontour-color);
+    background-color: transparent;
+    color: var(--ontour-color);
+    text-shadow: none;
+}
+
+.driver-popover .driver-popover-prev-btn:hover,
+.driver-popover .driver-popover-prev-btn:focus {
+    background-color: color-mix(in srgb, var(--ontour-color) 12%, transparent);
+}
+
+.driver-popover .driver-popover-close-btn:hover,
+.driver-popover .driver-popover-close-btn:focus {
+    color: var(--ontour-color);
+}
+
+.driver-popover .driver-popover-footer-btn:focus-visible,
+.driver-popover .driver-popover-close-btn:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--ontour-color) 50%, transparent);
+    outline-offset: 2px;
+}
+
+.driver-popover .driver-popover-description img {
+    max-width: 100%;
+}
+
+@media print {
+    .ontour-launcher {
+        display: none;
+    }
+}

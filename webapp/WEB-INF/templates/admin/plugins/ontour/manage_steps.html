@@ -1,0 +1,87 @@
+<#assign testUrls = test_urls!{} />
+<#assign perms = permissions[tour.code]!{} />
+<#assign canManageSteps = perms.MANAGE_STEPS!false />
+<#assign pageTitle>#i18n{ontour.manage_steps.pageTitle} : ${(tour.title!)?html}<#if (tour.lang!'')?has_content> (${tour.lang?upper_case})</#if></#assign>
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title=pageTitle>
+            <#if perms.TRANSLATE!false>
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=translateTour&id=${tour.id?c}' buttonIcon='language' title='#i18n{ontour.manage_tours.buttonTranslate}' color='secondary' />
+            </#if>
+            <#if canManageSteps>
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=createStep&id=${tour.id?c}' buttonIcon='plus' title='#i18n{ontour.manage_steps.buttonAdd}' color='primary' />
+            </#if>
+            <#if testUrls[tour.id?c]?? && tour.steps?has_content>
+                <@aButton href='${testUrls[tour.id?c]?html}' target='_blank' buttonIcon='player-play' title='#i18n{ontour.manage_tours.buttonTest}' color='success' />
+            </#if>
+            <#if perms.MODIFY!false>
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=modifyTour&id=${tour.id?c}' buttonIcon='edit' title='#i18n{ontour.manage_steps.buttonModifyTour}' color='secondary' />
+            </#if>
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='secondary' />
+        </@pageHeader>
+        <@messages infos=infos![] errors=errors![] warnings=warnings![] />
+        <#if !tour.enabled>
+            <@alert color='warning' title='#i18n{ontour.manage_steps.disabledWarning}' />
+        </#if>
+        <#if tour.steps?has_content>
+            <@manageFeature>
+                <#list tour.steps as step>
+                <@manageFeatureItem>
+                    <@manageFeatureItemColumn auto=true flex=false>
+                        <@span class='avatar avatar-sm rounded-circle bg-primary-lt'>${step?counter}</@span>
+                    </@manageFeatureItemColumn>
+                    <@manageFeatureItemColumn auto=true flex=false>
+                        <@p class='mb-1'><strong><#if (step.title!'')?has_content>${(step.title!)?html}<#else><em>#i18n{ontour.manage_steps.noTitle}</em></#if></strong></@p>
+                        <@p class='mb-0 small text-muted'>
+                            <#if (step.element!'')?has_content>
+                                #i18n{ontour.model.entity.step.attribute.element} : <code>${(step.element!)?html}</code>
+                            <#else>
+                                #i18n{ontour.manage_steps.labelCentered}
+                            </#if>
+                            <#if (step.side!'')?has_content> · #i18n{ontour.model.entity.step.side.${step.side}}</#if>
+                        </@p>
+                    </@manageFeatureItemColumn>
+                    <#if canManageSteps>
+                    <@manageFeatureItemColumn align='end'>
+                        <#if !step?is_first>
+                            <@tform method='post' action='jsp/admin/plugins/ontour/ManageTours.jsp' class='d-inline'>
+                                <@input type='hidden' name='action' value='moveStep' />
+                                <@input type='hidden' name='id_step' value='${step.id?c}' />
+                                <@input type='hidden' name='direction' value='up' />
+                                <@button type='submit' buttonIcon='arrow-up' title='#i18n{ontour.manage_steps.buttonUp}' hideTitle=['all'] color='secondary' />
+                            </@tform>
+                        </#if>
+                        <#if !step?is_last>
+                            <@tform method='post' action='jsp/admin/plugins/ontour/ManageTours.jsp' class='d-inline'>
+                                <@input type='hidden' name='action' value='moveStep' />
+                                <@input type='hidden' name='id_step' value='${step.id?c}' />
+                                <@input type='hidden' name='direction' value='down' />
+                                <@button type='submit' buttonIcon='arrow-down' title='#i18n{ontour.manage_steps.buttonDown}' hideTitle=['all'] color='secondary' />
+                            </@tform>
+                        </#if>
+                        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=modifyStep&id_step=${step.id?c}' buttonIcon='edit' title='#i18n{portal.util.labelModify}' hideTitle=['all'] color='primary' />
+                        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=confirmRemoveStep&id_step=${step.id?c}' buttonIcon='trash' title='#i18n{portal.util.labelDelete}' hideTitle=['all'] color='danger' />
+                    </@manageFeatureItemColumn>
+                    </#if>
+                </@manageFeatureItem>
+                </#list>
+            </@manageFeature>
+        <#else>
+            <@card>
+                <#if canManageSteps>
+                    <@empty title='#i18n{ontour.manage_steps.noStep}' iconName='list-details' actionTitle='#i18n{ontour.manage_steps.buttonAdd}' actionUrl='jsp/admin/plugins/ontour/ManageTours.jsp?view=createStep&id=${tour.id?c}' />
+                <#else>
+                    <@empty title='#i18n{ontour.manage_steps.noStep}' iconName='list-details' />
+                </#if>
+            </@card>
+        </#if>
+        <@box>
+            <@boxHeader title='#i18n{ontour.manage_steps.integrationTitle}' />
+            <@boxBody>
+                <@p>#i18n{ontour.manage_steps.integrationHelp}</@p>
+                <@code codeClass=''>&lt;button type="button" data-ontour-start="${(tour.code!)?html}"&gt;…&lt;/button&gt;
+&lt;script&gt;LuteceOnTour.start( '${(tour.code!)?js_string?html}' );&lt;/script&gt;</@code>
+            </@boxBody>
+        </@box>
+    </@pageColumn>
+</@pageContainer>

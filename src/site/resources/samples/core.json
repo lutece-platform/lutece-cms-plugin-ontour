@@ -1,0 +1,539 @@
+{
+  "version": 1,
+  "tours": [
+    {
+      "code": "core-admin-home",
+      "lang": "fr",
+      "title": "Accueil du back office",
+      "description": "Page d'accueil de l'administration (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/AdminMenu.jsp",
+      "pageParameters": "",
+      "pageSelector": "#dashboard-widgets",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "waitForElement": 1000,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Bienvenue dans le back office",
+          "description": "Cette visite présente l'accueil de l'administration : le menu, le tableau de bord et votre compte."
+        },
+        {
+          "element": "#main-menu",
+          "title": "Le menu",
+          "description": "Les fonctionnalités sont regroupées par catégorie (contenu, site, applications, système…). Seules celles pour lesquelles vous avez un droit apparaissent."
+        },
+        {
+          "element": "#dashboard-widgets",
+          "title": "Le tableau de bord",
+          "description": "Chaque plugin peut y afficher un widget : derniers contenus, utilisateurs, tâches à traiter…",
+          "side": "top"
+        },
+        {
+          "element": "#zone-1 .card",
+          "title": "Un widget",
+          "description": "Un résumé et des raccourcis vers la fonctionnalité correspondante.",
+          "side": "right",
+          "align": "start"
+        },
+        {
+          "element": "#dashboard-widgets-tools",
+          "title": "Personnaliser",
+          "description": "Réorganisez, repliez ou masquez les widgets. La disposition est mémorisée par votre navigateur.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "a.nav-link[href=\".\"]",
+          "title": "Voir le site",
+          "description": "Ouvre le front office dans un nouvel onglet."
+        },
+        {
+          "element": ".user-initials",
+          "title": "Votre compte",
+          "description": "Votre nom, votre dernière connexion, vos préférences et la déconnexion."
+        },
+        {
+          "element": ".ontour-launcher-button",
+          "title": "Les visites guidées",
+          "description": "Ce bouton relance une visite. Il apparaît sur chaque écran qui en propose une.",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "code": "core-admin-home",
+      "lang": "en",
+      "title": "Back office home",
+      "description": "Administration home page (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/AdminMenu.jsp",
+      "pageParameters": "",
+      "pageSelector": "#dashboard-widgets",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "waitForElement": 1000,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Welcome to the back office",
+          "description": "This tour presents the administration home: the menu, the dashboard and your account."
+        },
+        {
+          "element": "#main-menu",
+          "title": "The menu",
+          "description": "Features are grouped by category (content, site, applications, system…). Only the ones you have a right for are shown."
+        },
+        {
+          "element": "#dashboard-widgets",
+          "title": "The dashboard",
+          "description": "Each plugin can show a widget here: latest content, users, tasks to handle…",
+          "side": "top"
+        },
+        {
+          "element": "#zone-1 .card",
+          "title": "A widget",
+          "description": "A summary and shortcuts to the matching feature.",
+          "side": "right",
+          "align": "start"
+        },
+        {
+          "element": "#dashboard-widgets-tools",
+          "title": "Customize",
+          "description": "Reorder, collapse or hide the widgets. The layout is remembered by your browser.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "a.nav-link[href=\".\"]",
+          "title": "View the site",
+          "description": "Opens the front office in a new tab."
+        },
+        {
+          "element": ".user-initials",
+          "title": "Your account",
+          "description": "Your name, your last login, your preferences and logout."
+        },
+        {
+          "element": ".ontour-launcher-button",
+          "title": "Guided tours",
+          "description": "This button starts a tour again. It shows on every screen that offers one.",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "code": "core-manage-users",
+      "lang": "fr",
+      "title": "Gestion des utilisateurs",
+      "description": "Liste des utilisateurs du back office (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/user/ManageUsers.jsp",
+      "pageParameters": "",
+      "pageSelector": "#btn-search-users",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Les utilisateurs du back office",
+          "description": "Cet écran liste les comptes d'administration. Cette visite présente la création, la recherche et les actions sur un compte."
+        },
+        {
+          "element": "a[href*=\"CreateUser.jsp\"]",
+          "title": "Ajouter un utilisateur",
+          "description": "Crée un compte : identité, identifiant de connexion, mot de passe, niveau et groupe de travail.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-search-users",
+          "title": "Rechercher",
+          "description": "Retrouvez un compte par identifiant, nom, prénom, email ou statut (activé, désactivé, anonymisé).",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "a[href*=\"ExportUsers.jsp\"]",
+          "title": "Import et export",
+          "description": "Exporte les comptes, ou en importe depuis un fichier CSV.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "a[href*=\"defaultUserParameterValues\"]",
+          "title": "Paramètres avancés",
+          "description": "Politique de mots de passe, durée de vie des comptes, valeurs par défaut des nouveaux utilisateurs.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#portlet-type",
+          "title": "Actions sur un compte",
+          "description": "Modifier le compte, changer son mot de passe, attribuer ses droits, rôles et groupes de travail, l'anonymiser ou le supprimer.",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "code": "core-manage-users",
+      "lang": "en",
+      "title": "User management",
+      "description": "Back office user list (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/user/ManageUsers.jsp",
+      "pageParameters": "",
+      "pageSelector": "#btn-search-users",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Back office users",
+          "description": "This screen lists the administration accounts. This tour presents the creation, the search and the actions on an account."
+        },
+        {
+          "element": "a[href*=\"CreateUser.jsp\"]",
+          "title": "Add a user",
+          "description": "Creates an account: identity, login, password, level and workgroup.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#btn-search-users",
+          "title": "Search",
+          "description": "Find an account by login, last name, first name, email or status (enabled, disabled, anonymized).",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "a[href*=\"ExportUsers.jsp\"]",
+          "title": "Import and export",
+          "description": "Exports the accounts, or imports them from a CSV file.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "a[href*=\"defaultUserParameterValues\"]",
+          "title": "Advanced parameters",
+          "description": "Password policy, account lifetime, default values of the new users.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "#portlet-type",
+          "title": "Account actions",
+          "description": "Edit the account, change its password, assign its rights, roles and workgroups, anonymize or delete it.",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "code": "core-create-user",
+      "lang": "fr",
+      "title": "Créer un utilisateur",
+      "description": "Formulaire de création d'un utilisateur du back office (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/user/CreateUser.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"create_user\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "element": "#last_name",
+          "title": "Identité",
+          "description": "Nom, prénom et email de la personne. L'email sert aux notifications et à la réinitialisation du mot de passe.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#access_code",
+          "title": "Identifiant",
+          "description": "L'identifiant de connexion, unique sur le site.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#generate_password",
+          "title": "Mot de passe",
+          "description": "Générez un mot de passe conforme à la politique du site, ou saisissez-le puis confirmez-le.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "input[name=\"notify_user\"]",
+          "title": "Notifier",
+          "description": "Envoie ses identifiants à la personne par email.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#status",
+          "title": "Compte",
+          "description": "Statut du compte, niveau d'administration, groupe de travail et langue de l'interface.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "form[name=\"create_user\"] button[type=\"submit\"]",
+          "title": "Créer",
+          "description": "Crée le compte. Attribuez-lui ensuite ses droits depuis la liste des utilisateurs.",
+          "side": "top"
+        }
+      ]
+    },
+    {
+      "code": "core-create-user",
+      "lang": "en",
+      "title": "Creating a user",
+      "description": "Back office user creation form (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/user/CreateUser.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[name=\"create_user\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "element": "#last_name",
+          "title": "Identity",
+          "description": "Last name, first name and email of the person. The email is used for notifications and password resets.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#access_code",
+          "title": "Login",
+          "description": "The login of the account, unique on the site.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#generate_password",
+          "title": "Password",
+          "description": "Generate a password that follows the site policy, or type it and confirm it.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": "input[name=\"notify_user\"]",
+          "title": "Notify",
+          "description": "Sends the credentials to the person by email.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "#status",
+          "title": "Account",
+          "description": "Status of the account, administration level, workgroup and interface language.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "form[name=\"create_user\"] button[type=\"submit\"]",
+          "title": "Create",
+          "description": "Creates the account. Then assign its rights from the user list.",
+          "side": "top"
+        }
+      ]
+    },
+    {
+      "code": "core-user-rights",
+      "lang": "fr",
+      "title": "Droits d'un utilisateur",
+      "description": "Attribution des droits d'un utilisateur (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/user/ModifyUserRights.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[action*=\"DoModifyUserRights\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "element": ".card-header-tabs",
+          "title": "Le compte",
+          "description": "Ces onglets donnent accès au compte, au mot de passe, aux droits, aux rôles et aux groupes de travail de l'utilisateur.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "input[name=\"right\"]",
+          "title": "Un droit",
+          "description": "Chaque droit ouvre une fonctionnalité du back office. Vous ne pouvez attribuer que les droits de votre niveau.",
+          "side": "right"
+        },
+        {
+          "element": ".toggleCheck",
+          "title": "Tout cocher",
+          "description": "Sélectionne ou désélectionne tous les droits d'un coup.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "form[action*=\"DoModifyUserRights\"] button[type=\"submit\"]",
+          "title": "Enregistrer",
+          "description": "Enregistre les droits cochés.",
+          "side": "bottom",
+          "align": "end"
+        }
+      ]
+    },
+    {
+      "code": "core-user-rights",
+      "lang": "en",
+      "title": "User rights",
+      "description": "Rights assignment of a user (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/user/ModifyUserRights.jsp",
+      "pageParameters": "",
+      "pageSelector": "form[action*=\"DoModifyUserRights\"]",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "element": ".card-header-tabs",
+          "title": "The account",
+          "description": "These tabs give access to the account, the password, the rights, the roles and the workgroups of the user.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "input[name=\"right\"]",
+          "title": "A right",
+          "description": "Each right opens a back office feature. You can only assign the rights of your own level.",
+          "side": "right"
+        },
+        {
+          "element": ".toggleCheck",
+          "title": "Select all",
+          "description": "Selects or clears all the rights at once.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": "form[action*=\"DoModifyUserRights\"] button[type=\"submit\"]",
+          "title": "Save",
+          "description": "Saves the checked rights.",
+          "side": "bottom",
+          "align": "end"
+        }
+      ]
+    },
+    {
+      "code": "core-site-properties",
+      "lang": "fr",
+      "title": "Propriétés du site",
+      "description": "Gestion des propriétés du site (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/ManageProperties.jsp",
+      "pageParameters": "",
+      "pageSelector": "#search_prop",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Les propriétés du site",
+          "description": "Nom du site, métadonnées, emails, logo, mise en page du back office et du front office : tout se règle ici."
+        },
+        {
+          "element": "#search_prop",
+          "title": "Filtrer",
+          "description": "Saisissez un mot pour n'afficher que les propriétés correspondantes. Le filtre est conservé d'une page à l'autre.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".card-header-tabs",
+          "title": "Les groupes",
+          "description": "Les propriétés sont réparties par onglet : le site, puis chaque plugin ou thème qui en déclare.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".tab-pane.active [data-prop]",
+          "title": "Un groupe de propriétés",
+          "description": "Chaque carte regroupe des propriétés liées. L'aide sous un champ en précise l'usage.",
+          "side": "right"
+        },
+        {
+          "element": ".sticky-bottom button[type=\"submit\"]",
+          "title": "Enregistrer",
+          "description": "Enregistre en une fois les modifications de tous les onglets.",
+          "side": "top"
+        }
+      ]
+    },
+    {
+      "code": "core-site-properties",
+      "lang": "en",
+      "title": "Site properties",
+      "description": "Site properties management (lutece-core)",
+      "target": "BO",
+      "pagePath": "jsp/admin/ManageProperties.jsp",
+      "pageParameters": "",
+      "pageSelector": "#search_prop",
+      "triggerMode": "first_visit",
+      "showLauncher": true,
+      "enabled": true,
+      "skipMissingElement": true,
+      "showProgress": true,
+      "steps": [
+        {
+          "title": "Site properties",
+          "description": "Site name, metadata, emails, logo, back office and front office layout: everything is set here."
+        },
+        {
+          "element": "#search_prop",
+          "title": "Filter",
+          "description": "Type a word to show only the matching properties. The filter is kept from one page to the next.",
+          "side": "bottom",
+          "align": "end"
+        },
+        {
+          "element": ".card-header-tabs",
+          "title": "Groups",
+          "description": "The properties are split into tabs: the site, then each plugin or theme that declares some.",
+          "side": "bottom",
+          "align": "start"
+        },
+        {
+          "element": ".tab-pane.active [data-prop]",
+          "title": "A group of properties",
+          "description": "Each card groups related properties. The help under a field explains its use.",
+          "side": "right"
+        },
+        {
+          "element": ".sticky-bottom button[type=\"submit\"]",
+          "title": "Save",
+          "description": "Saves the changes of every tab at once.",
+          "side": "top"
+        }
+      ]
+    }
+  ]
+}

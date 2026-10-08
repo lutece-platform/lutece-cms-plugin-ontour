@@ -1,0 +1,117 @@
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title='#i18n{ontour.manage_tours.pageTitle}'>
+            <#if tour_list?has_content>
+                <@tform method='post' type='inline' params='onsubmit="return false;"'>
+                    <@formGroup labelFor='search_tour' labelKey='#i18n{portal.system.manage_plugins.buttonFilter}' hideLabel=['all'] formStyle='inline'>
+                        <@inputGroup>
+                            <@input type='text' name='search_tour' id='search_tour' placeHolder='#i18n{portal.system.manage_plugins.buttonFilter}' params='autocomplete="off" addons' />
+                            <@button type='submit' color='primary' title='#i18n{portal.system.manage_plugins.buttonFilter}' buttonIcon='filter' hideTitle=['all'] />
+                        </@inputGroup>
+                    </@formGroup>
+                </@tform>
+            </#if>
+            <#assign launcherInfo>#i18n{ontour.model.entity.tour.target.BO} : <strong>#i18n{ontour.launcher.position.${launcher_position_bo}}</strong><br>#i18n{ontour.model.entity.tour.target.FO} : <strong>#i18n{ontour.launcher.position.${launcher_position_fo}}</strong></#assign>
+            <#assign launcherPopover>data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-html="true" data-bs-title="#i18n{ontour.manage_tours.labelLauncher}" data-bs-content="${launcherInfo?html}"</#assign>
+            <#if can_manage_properties>
+                <@aButton href='jsp/admin/ManageProperties.jsp' buttonIcon='adjustments' title='#i18n{ontour.manage_tours.buttonSettings}' color='secondary' class='me-1' params=launcherPopover />
+            <#else>
+                <@button buttonIcon='info-circle' title='#i18n{ontour.manage_tours.buttonSettings}' color='secondary' class='me-1' params=launcherPopover />
+            </#if>
+            <#if can_create>
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=createTour' buttonIcon='plus' title='#i18n{ontour.manage_tours.buttonAdd}' color='primary' params='data-ontour="ontour-add"' />
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=importTours' buttonIcon='upload' title='#i18n{ontour.manage_tours.buttonImport}' color='secondary' params='data-ontour="ontour-import"' />
+            </#if>
+            <#if permissions?values?filter( p -> p.EXPORT )?has_content>
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=exportTours' buttonIcon='download' title='#i18n{ontour.manage_tours.buttonExportAll}' color='secondary' />
+            </#if>
+        </@pageHeader>
+        <@messages infos=infos![] errors=errors![] warnings=warnings![] />
+        <#if tour_list?has_content>
+            <@manageFeature id='ontour-tour-list'>
+                <#list tour_list as tour>
+                <#assign perms = permissions[tour.code]!{} />
+                <@manageFeatureItem liClass='ontour-tour-item'>
+                    <@manageFeatureItemColumn auto=true flex=false class='searchable'>
+                        <@p class='mb-1'>
+                            <strong>${(tour.title!)?html}</strong>
+                            <code class="ms-2">${(tour.code!)?html}</code>
+                            <@tag color='purple-lt' class='ms-1' title='#i18n{ontour.model.entity.tour.attribute.lang}'><#if (tour.lang!'')?has_content>${tour.lang?upper_case}<#else>#i18n{ontour.model.entity.tour.lang.all}</#if></@tag>
+                        </@p>
+                        <@p class='mb-1 small'>
+                            <@tag color='${(tour.target == "BO")?then("indigo","teal")}-lt'>#i18n{ontour.model.entity.tour.target.${tour.target}}</@tag>
+                            <#if tour.enabled>
+                                <@tag color='success-lt'>#i18n{portal.util.labelEnabled}</@tag>
+                            <#else>
+                                <@tag color='secondary-lt'>#i18n{portal.util.labelDisabled}</@tag>
+                            </#if>
+                            <@tag color='azure-lt'>#i18n{ontour.model.entity.tour.triggerMode.${tour.triggerMode}}</@tag>
+                            <@span class='ms-1'>${tour.steps?size} #i18n{ontour.manage_tours.labelSteps}</@span>
+                            <#assign counts = state_counts[tour.code]!{} />
+                            <#if counts?has_content>
+                                <@span class='ms-2 text-muted' params='title="#i18n{ontour.manage_tours.labelStatesHelp}"'>· ${(counts.done!0)?c} #i18n{ontour.manage_tours.labelDone} · ${(counts.closed!0)?c} #i18n{ontour.manage_tours.labelClosed}</@span>
+                            </#if>
+                        </@p>
+                        <@p class='mb-0 small text-muted'>
+                            <#if (tour.pagePath!'')?has_content>
+                                #i18n{ontour.model.entity.tour.attribute.pagePath} : <code>${(tour.pagePath!)?html}<#if (tour.pageParameters!'')?has_content>?${(tour.pageParameters!)?html}</#if></code>
+                                <#if (tour.pageSelector!'')?has_content> · #i18n{ontour.model.entity.tour.attribute.pageSelector} : <code>${(tour.pageSelector!)?html}</code></#if>
+                            <#else>
+                                #i18n{ontour.manage_tours.labelManualOnly} <code>data-ontour-start="${(tour.code!)?html}"</code>
+                            </#if>
+                        </@p>
+                    </@manageFeatureItemColumn>
+                    <@manageFeatureItemColumn align='end'>
+                        <#if test_urls[tour.id?c]??>
+                            <@aButton href='${test_urls[tour.id?c]?html}' target='_blank' buttonIcon='player-play' title='#i18n{ontour.manage_tours.buttonTest}' hideTitle=['all'] color='success' params='data-ontour="ontour-test"' />
+                        </#if>
+                        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageSteps&id=${tour.id?c}' buttonIcon='list-numbers' title='#i18n{ontour.manage_tours.buttonSteps}' hideTitle=['all'] color='primary' params='data-ontour="ontour-steps"' />
+                        <#assign canReset = (perms.RESET!false) && (state_counts[tour.code]!{})?has_content />
+                        <#if (perms.MODIFY!false) || (perms.TRANSLATE!false) || (perms.EXPORT!false) || canReset || (perms.DELETE!false)>
+                            <@aButton class='dropdown-toggle' id='tour-actions-${tour.id?c}' dropdownMenu=true href='#' title='#i18n{portal.util.labelActions}' color='' hideTitle=['all'] buttonIcon='dots-vertical'>
+                                <#if perms.MODIFY!false>
+                                    <@link class='dropdown-item' href='jsp/admin/plugins/ontour/ManageTours.jsp?view=modifyTour&id=${tour.id?c}' label='#i18n{portal.util.labelModify}' />
+                                </#if>
+                                <#if perms.TRANSLATE!false>
+                                    <@link class='dropdown-item' href='jsp/admin/plugins/ontour/ManageTours.jsp?view=translateTour&id=${tour.id?c}' label='#i18n{ontour.manage_tours.buttonTranslate}' />
+                                </#if>
+                                <#if perms.EXPORT!false>
+                                    <@link class='dropdown-item' href='jsp/admin/plugins/ontour/ManageTours.jsp?view=exportTours&id=${tour.id?c}' label='#i18n{ontour.manage_tours.buttonExport}' />
+                                </#if>
+                                <#if canReset>
+                                    <@link class='dropdown-item text-warning' href='jsp/admin/plugins/ontour/ManageTours.jsp?view=confirmResetTour&id=${tour.id?c}' label='#i18n{ontour.manage_tours.buttonReset}' />
+                                </#if>
+                                <#if perms.DELETE!false>
+                                    <@link class='dropdown-item text-danger' href='jsp/admin/plugins/ontour/ManageTours.jsp?view=confirmRemoveTour&id=${tour.id?c}' label='#i18n{portal.util.labelDelete}' />
+                                </#if>
+                            </@aButton>
+                        </#if>
+                    </@manageFeatureItemColumn>
+                </@manageFeatureItem>
+                </#list>
+            </@manageFeature>
+            <@paginationAdmin paginator=paginator combo=1 />
+        <#else>
+            <@card>
+                <#if can_create>
+                    <@empty title='#i18n{ontour.manage_tours.noTour}' iconName='route-off' subtitle='#i18n{ontour.manage_tours.noTourHelp}' actionTitle='#i18n{ontour.manage_tours.buttonAdd}' actionUrl='jsp/admin/plugins/ontour/ManageTours.jsp?view=createTour' />
+                <#else>
+                    <@empty title='#i18n{ontour.manage_tours.noTour}' iconName='route-off' subtitle='#i18n{ontour.manage_tours.noTourHelp}' />
+                </#if>
+            </@card>
+        </#if>
+    </@pageColumn>
+</@pageContainer>
+<#if tour_list?has_content>
+<script type="module">
+import LuteceSearchList from './themes/shared/modules/luteceSearchList.js';
+new LuteceSearchList( document.querySelector( '#search_tour' ), document.querySelectorAll( '.ontour-tour-item' ), {
+    searchableChild: [ '.searchable' ],
+    highlight: true,
+    persist: true,
+    persistKey: 'ontour-admin-tour-search',
+    clearButton: true,
+    clearButtonLabel: '#i18n{portal.util.labelReset}'
+} );
+</script>
+</#if>

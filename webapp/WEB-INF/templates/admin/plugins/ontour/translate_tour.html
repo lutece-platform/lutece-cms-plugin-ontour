@@ -1,0 +1,55 @@
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title='#i18n{ontour.translate_tour.pageTitle} : ${(tour.title!)?html}'>
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='secondary' />
+        </@pageHeader>
+        <@h level=3 class='mb-2'>#i18n{ontour.translate_tour.existing}</@h>
+        <#if translations?has_content>
+            <@manageFeature>
+                <#list translations as translation>
+                <@manageFeatureItem>
+                    <@manageFeatureItemColumn auto=true flex=false valign='top'>
+                        <@p class='fw-bold fs-3'>#i18n{ontour.model.entity.tour.attribute.lang}</@p>
+                        <@tag color='purple-lt'>${(lang_labels[translation.lang!'']!translation.lang!'')?html}</@tag>
+                    </@manageFeatureItemColumn>
+                    <@manageFeatureItemColumn auto=true flex=false valign='top'>
+                        <@p class='fw-bold fs-3'>#i18n{ontour.model.entity.tour.attribute.title}</@p>
+                        ${(translation.title!)?html}
+                    </@manageFeatureItemColumn>
+                    <@manageFeatureItemColumn auto=true flex=false valign='top'>
+                        <@p class='fw-bold fs-3'>#i18n{ontour.model.entity.tour.attribute.enabled}</@p>
+                        <#if translation.enabled>
+                            <@tag color='success-lt'>#i18n{portal.util.labelYes}</@tag>
+                        <#else>
+                            <@tag color='secondary-lt'>#i18n{portal.util.labelNo}</@tag>
+                        </#if>
+                    </@manageFeatureItemColumn>
+                    <@manageFeatureItemColumn align='end'>
+                        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageSteps&id=${translation.id?c}' buttonIcon='list-numbers' title='#i18n{ontour.manage_tours.buttonSteps}' hideTitle=['all'] color='primary' />
+                        <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=modifyTour&id=${translation.id?c}' buttonIcon='edit' title='#i18n{portal.util.labelModify}' hideTitle=['all'] color='primary' />
+                    </@manageFeatureItemColumn>
+                </@manageFeatureItem>
+                </#list>
+            </@manageFeature>
+        <#else>
+            <@card>
+                <@empty title='#i18n{ontour.translate_tour.existing}' iconName='language-off' />
+            </@card>
+        </#if>
+        <#if lang_list?has_content>
+            <@tform method='post' name='translate_tour' action='jsp/admin/plugins/ontour/ManageTours.jsp' boxed=true>
+                <@input type='hidden' name='action' value='translateTour' />
+                <@input type='hidden' name='id' value='${tour.id?c}' />
+                <@formGroup labelFor='lang' labelKey='#i18n{ontour.translate_tour.labelLang}' helpKey='#i18n{ontour.translate_tour.help}' rows=2>
+                    <@select name='lang' id='lang' items=lang_list />
+                </@formGroup>
+                <@formGroup rows=2>
+                    <@button type='submit' buttonIcon='language' title='#i18n{ontour.translate_tour.buttonCreate}' color='primary' />
+                    <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='x' title='#i18n{portal.util.labelCancel}' color='secondary' />
+                </@formGroup>
+            </@tform>
+        <#else>
+            <@alert color='info' title='#i18n{ontour.translate_tour.allDone}' />
+        </#if>
+    </@pageColumn>
+</@pageContainer>

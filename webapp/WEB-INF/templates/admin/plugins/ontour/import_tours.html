@@ -1,0 +1,33 @@
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title='#i18n{ontour.import_tours.pageTitle}'>
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='secondary' />
+        </@pageHeader>
+        <@messages errors=errors![] />
+        <@tform method='post' name='import_tours' action='jsp/admin/plugins/ontour/ManageTours.jsp' boxed=true>
+            <@input type='hidden' name='action' value='importTours' />
+            <@formGroup labelFor='json_file' labelKey='#i18n{ontour.import_tours.labelFile}' helpKey='#i18n{ontour.import_tours.helpFile}' rows=2>
+                <@input type='file' name='json_file' id='json_file' accept='.json,application/json' />
+            </@formGroup>
+            <@formGroup labelFor='json' labelKey='#i18n{ontour.import_tours.labelJson}' helpKey='#i18n{ontour.import_tours.helpJson}' mandatory=true rows=2>
+                <@input type='textarea' name='json' id='json' rows=16 class='font-monospace' mandatory=true>${(json!)?html}</@input>
+            </@formGroup>
+            <@formGroup labelFor='overwrite' labelKey='#i18n{ontour.import_tours.labelOverwrite}' rows=2>
+                <@checkBox orientation='switch' name='overwrite' id='overwrite' value='true' labelKey='#i18n{ontour.import_tours.helpOverwrite}' checked=overwrite!false />
+            </@formGroup>
+            <@formGroup rows=2>
+                <@button type='submit' buttonIcon='upload' title='#i18n{ontour.import_tours.buttonImport}' color='primary' />
+                <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageTours' buttonIcon='x' title='#i18n{portal.util.labelCancel}' color='secondary' />
+            </@formGroup>
+        </@tform>
+    </@pageColumn>
+</@pageContainer>
+<script>
+document.getElementById( 'json_file' ).addEventListener( 'change', async ( event ) => {
+    const file = event.target.files[ 0 ];
+    if ( file ) {
+        document.getElementById( 'json' ).value = await file.text( );
+    }
+    event.target.value = '';
+} );
+</script>

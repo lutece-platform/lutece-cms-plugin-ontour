@@ -1,0 +1,10 @@
+<#include "/admin/plugins/ontour/tour_macros.html" />
+<@pageContainer>
+    <@pageColumn>
+        <@pageHeader title='#i18n{ontour.create_step.pageTitle} : ${(tour.title!)?html}'>
+            <@aButton href='jsp/admin/plugins/ontour/ManageTours.jsp?view=manageSteps&id=${tour.id?c}' buttonIcon='arrow-left' title='#i18n{portal.util.labelBack}' color='secondary' />
+        </@pageHeader>
+        <@messages errors=errors![] />
+        <@stepForm action='createStep' />
+    </@pageColumn>
+</@pageContainer>
